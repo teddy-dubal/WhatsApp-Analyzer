@@ -6,12 +6,13 @@ import patterns
 
 # TODO: Classify attachment
 
+
 class Chatline:
 
     def __init__(self, line="", previous_line=None, debug=False):
         self.previous_line = previous_line
         self.line = line
-        self.line_type = None # Chat/Event/Attachment
+        self.line_type = None  # Chat/Event/Attachment
         self.timestamp = None
         self.sender = None
         self.body = ""
@@ -45,7 +46,8 @@ class Chatline:
         The Rule is:
         <datetime><separator><contact/phone number>
         """
-        match = re.match(re.compile(patterns.IS_STARTING_LINE, re.VERBOSE), line)
+        match = re.match(re.compile(
+            patterns.IS_STARTING_LINE, re.VERBOSE), line)
         if match:
             return match
 
@@ -90,7 +92,7 @@ class Chatline:
         """
         EXTRACT TIMESTAMP
         """
-        timestamp = parser.parse(time_string)
+        timestamp = parser.parse(time_string.replace("à", ""))
         return timestamp
 
     def extract_url(self, body=""):
@@ -106,9 +108,9 @@ class Chatline:
         return domain[0]
 
     def get_words(self, string=""):
-        #remove non alpha content
+        # remove non alpha content
         regex = re.sub(r"[^a-z\s]+", "", string.lower())
-        regex = re.sub(r'[^\x00-\x7f]',r'', regex)
+        regex = re.sub(r'[^\x00-\x7f]', r'', regex)
         words = re.sub(r"[^\w]", " ",  string).split()
 
         return words
@@ -222,7 +224,7 @@ class Chatline:
                     # Set Words
                     self.words = self.get_words(words)
 
-                    #Emoji
+                    # Emoji
                     emjs = self.extract_emojis(message_body)
                     if emjs:
                         self.emojis = emjs

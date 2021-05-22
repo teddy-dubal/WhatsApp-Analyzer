@@ -174,3 +174,6 @@ Describe how the script identify and classify the chat
 
 #### Buy me a coffee
 <a href="https://www.buymeacoffee.com/PetengDedet" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" style="height: 22px !important;" ></a>
+
+docker build -t whatsapp --rm .
+docker run --mount type=bind,src=`pwd`,dst=/app -it --name whatsapp_app --rm whatsapp

@@ -12,7 +12,8 @@ IS_STARTING_LINE = r"""
     (\d{1,2})   #1 to 2 digit month
     (/|-)       #'/' or '-' separator
     (\d{2,4}))   #2 to 4 digit of year
-    (,?\s)      #Zero or one comma ',' and ingle space
+    # ([à ]+)
+    (,?\s|[à ]+)      #Zero or one comma ',' and ingle space
     ((\d{1,2})  #1 to 2 digit of hour
     (:|\.)      #Colon ':' or dot '.' separator
     (\d{2})     #2 digit of minute
@@ -35,12 +36,14 @@ IS_DELETED_CHAT = [
 ]
 
 IS_ATTACHMENT = [
-    r".*<Media omitted>$", #English version of android attachment
-    r".*<Media tidak disertakan>$", #Indonesia version of android attachment
-    r".*Archivo omitido*", #Spanish version of android attachment
-    r".*Pesan tidak didukung$", #Some device not recognize sticker attachment
-    r".+\.vcf \(file\sterlampir\)$", #Indonesian version of android contact card,
-    r".+\.vcf \(file\sattached\)$", #Indonesian version of android contact card,
+    r".*<Media omitted>$",  # English version of android attachment
+    r".*<Media tidak disertakan>$",  # Indonesia version of android attachment
+    r".*Archivo omitido*",  # Spanish version of android attachment
+    r".*Pesan tidak didukung$",  # Some device not recognize sticker attachment
+    # Indonesian version of android contact card,
+    r".+\.vcf \(file\sterlampir\)$",
+    # Indonesian version of android contact card,
+    r".+\.vcf \(file\sattached\)$",
     r".*image omitted$",
     r".*video omitted$",
     r".*document omitted$",
@@ -59,6 +62,7 @@ IS_ATTACHMENT = [
 IS_URL = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,6}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
 
 IS_EVENT = [
+    r"Les messages et les appels sont chiffrés de bout en bout. Aucun tiers, pas même WhatsApp, ne peut les lire ou les écouter. Appuyez pour en savoir plus.\.$",  # EN
     # Welcoming message
     r"Messages to this group are now secured with end-to-end encryption\.$",  # EN
     # User created group
@@ -80,5 +84,3 @@ IS_EVENT = [
     r".*changed their phone number to a new number. Tap to message or add the new number\.$"  # EN
     r".*telah mengganti nomor teleponnya ke nomor baru. Ketuk untuk mengirim pesan atau menambahkan nomor baru\.$",  # ID
 ]
-
-
