@@ -55,6 +55,7 @@ args = parser.parse_args()
 """
 READ FILE
 """
+# lines = ["15/05/2021 à 09:53 - +590 690 07-7621: 🤣🤣🤣 des génies..."]
 try:
     with io.open(args.file, "r", encoding="utf-8") as file:
         lines = file.readlines()
@@ -173,7 +174,6 @@ chat_counter['emojis'] = reduce_and_sort(chat_counter['emojis'])
 chat_counter['timestamps'] = reduce_and_sort([(x.strftime('%A'), x.strftime('%H')) for x in chat_counter['timestamps']])
 chat_counter['fav_emoji'] = reduce_fav_item(reduce_and_sort(chat_counter['fav_emoji']))
 chat_counter['fav_word'] = reduce_fav_item(reduce_and_sort([x for x in chat_counter['fav_word'] if filter_single_word(x[1])]))
-
 """
 VISUALIZE
 """
@@ -320,31 +320,31 @@ printBarChart(data[:20], fill=Color.green("█"))
 print()
 print()
 
-# Heatmap
-data = chat_counter['timestamps']
-print(Color.purple("-" * 50))
-print(Color.purple("Chat Activity Heatmap"))
-print(Color.purple("-" * 50))
-if len(data) > 0:
-    print("Most Busy\t: {}, at {} ({} chat)".format(
-        Color.purple(str(data[0][0][0])), 
-        Color.purple(str(data[0][0][1]) + ":00"), 
-        Color.purple(str(data[0][1]))))
-    print("Most Silence\t: {}, at {} ({} chat)".format(
-        Color.purple(str(data[-1][0][0])), 
-        Color.purple(str(data[-1][0][1]) + ":00"), 
-        Color.purple(str(data[-1][1]))))
-print()
-print('---')
-print('X: Days')
-print('Y: Hours')
-print('---')
-print('Less [{}{}{}{}{}] More'.format(
-    Color.custom("===", bold=False), 
-    Color.custom("░░░", bold=True, fg_light_grey=True),
-    Color.custom("▒▒▒", bold=True, fg_green=True),
-    Color.custom("▓▓▓", bold=True, fg_orange=True),
-    Color.custom("███", bold=True, fg_red=True)
-))
-print()
-printCalendar(dict(data))
+# # Heatmap
+# data = chat_counter['timestamps']
+# print(Color.purple("-" * 50))
+# print(Color.purple("Chat Activity Heatmap"))
+# print(Color.purple("-" * 50))
+# if len(data) > 0:
+#     print("Most Busy\t: {}, at {} ({} chat)".format(
+#         Color.purple(str(data[0][0][0])), 
+#         Color.purple(str(data[0][0][1]) + ":00"), 
+#         Color.purple(str(data[0][1]))))
+#     print("Most Silence\t: {}, at {} ({} chat)".format(
+#         Color.purple(str(data[-1][0][0])), 
+#         Color.purple(str(data[-1][0][1]) + ":00"), 
+#         Color.purple(str(data[-1][1]))))
+# print()
+# print('---')
+# print('X: Days')
+# print('Y: Hours')
+# print('---')
+# print('Less [{}{}{}{}{}] More'.format(
+#     Color.custom("===", bold=False), 
+#     Color.custom("░░░", bold=True, fg_light_grey=True),
+#     Color.custom("▒▒▒", bold=True, fg_green=True),
+#     Color.custom("▓▓▓", bold=True, fg_orange=True),
+#     Color.custom("███", bold=True, fg_red=True)
+# ))
+# print()
+# printCalendar(dict(data))

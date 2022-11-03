@@ -112,13 +112,12 @@ class Chatline:
         regex = re.sub(r"[^a-z\s]+", "", string.lower())
         regex = re.sub(r'[^\x00-\x7f]', r'', regex)
         words = re.sub(r"[^\w]", " ",  string).split()
-
         return words
 
     def extract_emojis(self, string=""):
         emj = []
         for c in string:
-            if c in emoji.UNICODE_EMOJI_ALIAS_ENGLISH:
+            if c in emoji.EMOJI_DATA:
                 emj.append(c)
         return emj
 
@@ -223,7 +222,7 @@ class Chatline:
 
                     # Set Words
                     self.words = self.get_words(words)
-
+                    # print(self.words)
                     # Emoji
                     emjs = self.extract_emojis(message_body)
                     if emjs:
